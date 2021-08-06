@@ -12,6 +12,9 @@ function Nav() {
         <Link to="/tablePage">
             <li>Table Page</li>
         </Link>
+        <Link to="/newEntry">
+            <li>New Entry</li>
+        </Link>
         <Link to="/counter">
             <li>Counter</li>
         </Link>

@@ -5,6 +5,7 @@ import './App.css';
 import Counter from './components/Counter';
 import TablePage from './components/TablePage';
 import Nav from './components/Nav';
+import NewEntry from './components/NewEntry';
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
 				<Switch>
 					<Route path="/" exact component ={ Home } />
 					<Route path="/tablePage" component ={ TablePage } />
+					<Route path="/newEntry" component ={ NewEntry } />
 					<Route path="/counter" component ={ Counter } />
 				</Switch>
 			</div>

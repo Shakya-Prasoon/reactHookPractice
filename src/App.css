@@ -117,3 +117,10 @@ form {
   font-size: 16px;
   font-weight: 400;
 }
+
+.newEntry{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
