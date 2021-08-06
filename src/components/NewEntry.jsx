@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 
 const NewEntry = (setUniverisity, setSpecialization, setGraduation, setEmployer, setJobtitle, setJobstart, setCareer) => {
     return(
-        <form class="newEntry">
+        <form className="newEntry">
             <span>
                 <label for="university">University Name</label>
                 <input onChange={e=> setUniverisity(e.target.value)} name="university"></input>
@@ -32,6 +31,7 @@ const NewEntry = (setUniverisity, setSpecialization, setGraduation, setEmployer,
                 <label for="careerUrl">Career Url</label>
                 <input onChange={e=> setCareer(e.target.value)} name="careerUrl"></input>
             </span>
+            <button type="submit">Add To List</button>
         </form>
     )
 }

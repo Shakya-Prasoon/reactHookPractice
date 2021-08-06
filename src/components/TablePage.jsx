@@ -4,6 +4,7 @@ import Card from "./Card.jsx";
 import { v4 as uuidv4 } from "uuid";
 
 import "../App.css";
+import axios from "axios";
 
 function TablePage() {
     const [favList, setFavList] = useState([]);
@@ -24,6 +25,12 @@ function TablePage() {
         });
         setData(newData);
     }, []);
+
+    useEffect(() => {
+      axios.get('http://localhost:3001/users/getAllEntries')
+        .then(res => console.log(res))
+        .catch(e => console.log(e))
+    }, [])
 
     // Map returns all the elements as an 'li' element
     const employerList = data.map((obj) => (
@@ -108,6 +115,8 @@ function TablePage() {
         let newDataList = [newElement, ...data];
         setData(newDataList);
     }
+
+
 
     return (
     <div className="Home">
