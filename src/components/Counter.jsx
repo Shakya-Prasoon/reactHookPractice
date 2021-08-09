@@ -8,7 +8,7 @@ const Counter = () => {
     const[inpVal, setInpVal] = useState(0)
 
     return (
-        <div>
+        <div className="Main">
             <p>{counter}</p>
             <div>
                 <input onChange={(e) => setInpVal(parseInt(e.target.value))} placeholder="Numeric Value"></input>

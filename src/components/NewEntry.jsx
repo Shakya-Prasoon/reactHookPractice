@@ -2,7 +2,7 @@ import React from 'react'
 
 const NewEntry = (setUniverisity, setSpecialization, setGraduation, setEmployer, setJobtitle, setJobstart, setCareer) => {
     return(
-        <form className="newEntry">
+        <form className="newEntry Main">
             <span>
                 <label for="university">University Name</label>
                 <input onChange={e=> setUniverisity(e.target.value)} name="university"></input>

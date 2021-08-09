@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import importedData from "../Student_Data.json";
+// import importedData from "../Student_Data.json";
 import Card from "./Card.jsx";
 import { v4 as uuidv4 } from "uuid";
+import { LinearProgress } from '@material-ui/core';
+import Post from "./Post.jsx";
 
 import "../App.css";
 import axios from "axios";
@@ -17,20 +19,38 @@ function TablePage() {
     const [Job_Title, setJobTitle] = useState("");
     const [Job_Start_Date, setJobStartDate] = useState("");
     const [Career_Url, setCareerUrl] = useState("");
+    const [isLoading, setIsLoading] = useState(false)
+    const [isLoadingPosts, setIsLoadingPosts] = useState(false)
+    const [posts, setPosts] = useState([])
+
+    // useEffect(() => {
+    //     let newData = [...importedData];
+    //     newData = newData.map((i) => {
+	// 				return { ...i, id: uuidv4() };
+    //     });
+    //     setData(newData);
+    // }, []);
 
     useEffect(() => {
-        let newData = [...importedData];
-        newData = newData.map((i) => {
-					return { ...i, id: uuidv4() };
-        });
-        setData(newData);
-    }, []);
-
-    useEffect(() => {
+        setIsLoading(true)
       axios.get('http://localhost:3001/users/getAllEntries')
-        .then(res => console.log(res))
-        .catch(e => console.log(e))
+        // .then(res => console.log(res.data))
+        .then(res => {setData(res.data)
+            setIsLoading(false)})
+        .catch(() => {setIsLoading(false)})
     }, [])
+
+
+    useEffect(() => {
+        setIsLoadingPosts(true)
+      axios.get('http://localhost:3001/getposts')
+        // .then(res => console.log(res.data))
+        .then(res => {setPosts(res.data)
+            setIsLoadingPosts(false)})
+        .catch(() => {setIsLoadingPosts(false)})
+    }, [])
+
+
 
     // Map returns all the elements as an 'li' element
     const employerList = data.map((obj) => (
@@ -44,29 +64,25 @@ function TablePage() {
             <br />
             <button
                 disabled={favList.includes(obj.Employer)}
-                onClick={() => {
-                    handelFav(obj.Employer);
-                }}
-            >
+                onClick={() => {handelFav(obj.Employer);}}>
                 Favorite
             </button>
             <button
                 disabled={!favList.includes(obj.Employer)}
-                onClick={() => {
-									handelUnFav(obj.Employer);
-                }}
-            >
+                onClick={() => {handelUnFav(obj.Employer);}}>
                 Un-Favorite
             </button>
             <button
-                onClick={() => {
-									removeElement(obj.id);
-                }}
-            >
+                onClick={() => {removeElement(obj.id); }}>
                 Delete
             </button>
         </li>
     ));
+
+    const postList = posts.map(obj => {
+        return (<li key={uuidv4()}><Post title={obj.title} /></li>)
+    })
+
 
     function handelFav(employer) {
         let list = [...favList];
@@ -116,10 +132,16 @@ function TablePage() {
         setData(newDataList);
     }
 
+    if(isLoading || isLoadingPosts){ 
+        return(<>
+        <LinearProgress />
+        <LinearProgress color="secondary" />
+        </>)
+    }
 
 
     return (
-    <div className="Home">
+    <div className="Main">
         <div className="recentlyDeleted">
                 {`Recently Deleted: ${deleted.join(", ")}`}
         </div>
@@ -129,55 +151,35 @@ function TablePage() {
                 )}`}
         </div>
         <form className="input">
-                <input
-                        onChange={(e) => setUniversity(e.target.value)}
-                        type="text"
-                        placeholder="University_Name"
-                />
-                <input
-                        onChange={(e) =>
-                                setSpecialization(e.target.value)
-                        }
-                        type="text"
-                        placeholder="Specialization"
-                />
-                <input
-                        onChange={(e) =>
-                                setGraduationYear(e.target.value)
-                        }
-                        type="text"
-                        placeholder="Graduation_Year"
-                />
-                <input
-                        onChange={(e) => setEmployer(e.target.value)}
-                        type="text"
-                        placeholder="Employer"
-                />
-                <input
-                        onChange={(e) => setJobTitle(e.target.value)}
-                        type="text"
-                        placeholder="Job_Title"
-                />
-                <input
-                        onChange={(e) =>
-                                setJobStartDate(e.target.value)
-                        }
-                        type="text"
-                        placeholder="Job_Start_Date"
-                />
-                <input
-                    onChange={(e) => setCareerUrl(e.target.value)}
+                <input onChange={(e) => setUniversity(e.target.value)}
                     type="text"
-                    placeholder="Career_Url"
-                />
-                <button
-                    onClick={(e) => addToTable(e)}
-                    type="submit"
-                >
-                    Add
-                </button>
+                    placeholder="University_Name"/>
+                <input onChange={(e) =>setSpecialization(e.target.value)}
+                    type="text"
+                    placeholder="Specialization"/>
+                <input onChange={(e) =>setGraduationYear(e.target.value)}
+                    type="text"
+                    placeholder="Graduation_Year"/>
+                <input onChange={(e) => setEmployer(e.target.value)}
+                    type="text"
+                    placeholder="Employer"/>
+                <input onChange={(e) => setJobTitle(e.target.value)}
+                    type="text"
+                    placeholder="Job_Title"/>
+                <input onChange={(e) =>setJobStartDate(e.target.value)}
+                    type="text"
+                    placeholder="Job_Start_Date"/>
+                <input onChange={(e) => setCareerUrl(e.target.value)}
+                    type="text"
+                    placeholder="Career_Url"/>
+                <button onClick={(e) => addToTable(e)}
+                    type="submit">
+                    Add </button>
         </form>
-        <ul className="employerName">{employerList}</ul>
+        <div className="bodySeparation">
+            <ul className="employerName">{employerList}</ul>
+            <ul className="employerName">{postList}</ul>
+        </div>
     </div>
     );
 }

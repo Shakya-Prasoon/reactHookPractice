@@ -90,3 +90,8 @@ form {
   justify-content: center;
   align-items: center;
 }
+
+.bodySeparation {
+  display: flex;
+  flex-direction: row;
+}
