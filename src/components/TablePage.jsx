@@ -4,7 +4,6 @@ import Card from "./Card.jsx";
 import { v4 as uuidv4 } from "uuid";
 import { LinearProgress } from '@material-ui/core';
 import Post from "./Post.jsx";
-
 import "../App.css";
 import axios from "axios";
 
@@ -22,6 +21,12 @@ function TablePage() {
     const [isLoading, setIsLoading] = useState(false)
     const [isLoadingPosts, setIsLoadingPosts] = useState(false)
     const [posts, setPosts] = useState([])
+    const [search, setSearch] = useState('')
+    const [searchInput, setSearchInput] = useState('')
+    const [currentPostPage, setCurrentPostPage] = useState(1)
+    const [currentEmployerPage, setCurrentEmployerPage] = useState(1)
+    const [totalEmployeeElement, setTotalEmployeeElement] = useState()
+    const [totalPostElement, setTotalPostElement] = useState()
 
     // useEffect(() => {
     //     let newData = [...importedData];
@@ -50,12 +55,23 @@ function TablePage() {
         .catch(() => {setIsLoadingPosts(false)})
     }, [])
 
+    useEffect(() => {
+        setTotalEmployeeElement(data.length)
+    }, [])
+    useEffect(() => {
+        setTotalPostElement(posts.length)
+    }, [])
+
+
 
 
     // Map returns all the elements as an 'li' element
-    const employerList = data.map((obj) => (
+    const employerList = data
+        .filter(i => (i.Employer.toLowerCase().includes(search) || i.Job_Title.toLowerCase().includes(search)  || i.University_Name.toLowerCase().includes(search)))
+        .slice(((currentEmployerPage-1)*10)+1,((currentEmployerPage-1)*10)+11 )
+        .map((obj) => (
         <li key={obj.id}>
-            <Card
+            <Card 
                 employer={obj.Employer}
                 jobTitle={obj.Job_Title}
                 universityName={obj.University_Name}
@@ -78,10 +94,32 @@ function TablePage() {
             </button>
         </li>
     ));
+    
+    function calculatePagesEmployer(){
+        let elementCount =  totalEmployeeElement
+        let pageCount = Math.ceil(elementCount/10)
+        let pages = []
+        for(let i= 1; i <= pageCount; i++){
+            pages.push(i)
+        }
+        return pages
+    }
 
-    const postList = posts.map(obj => {
+    const postList = posts
+        .filter(i => (i.title.toLowerCase().includes(search)))
+        .slice(((currentPostPage-1)*10)+1,((currentPostPage-1)*10)+11 )
+        .map(obj => {
         return (<li key={uuidv4()}><Post title={obj.title} /></li>)
     })
+    function calculatePagesPost(){
+        let elementCount =  totalPostElement
+        let pageCount = Math.ceil(elementCount/10)
+        let pages = []
+        for(let i= 1; i <= pageCount; i++){
+            pages.push(i)
+        }
+        return pages
+    }
 
 
     function handelFav(employer) {
@@ -132,6 +170,16 @@ function TablePage() {
         setData(newDataList);
     }
 
+    function handleSearch(i){
+        i.preventDefault()
+        setSearch(searchInput)
+    }
+
+    function handleClear(i){
+        i.preventDefault()
+        setSearch('')
+    }
+
     if(isLoading || isLoadingPosts){ 
         return(<>
         <LinearProgress />
@@ -143,12 +191,10 @@ function TablePage() {
     return (
     <div className="Main">
         <div className="recentlyDeleted">
-                {`Recently Deleted: ${deleted.join(", ")}`}
+            {`Recently Deleted: ${deleted.join(", ")}`}
         </div>
         <div className="favorite">
-                {`Your Favorite employers are:${favList.join(
-                        ", "
-                )}`}
+            {`Your Favorite employers are:${favList.join( ", ")}`}
         </div>
         <form className="input">
                 <input onChange={(e) => setUniversity(e.target.value)}
@@ -176,9 +222,28 @@ function TablePage() {
                     type="submit">
                     Add </button>
         </form>
+        <form className="SearchBar">
+            <input 
+                onChange={(e) => setSearchInput((e.target.value).toLowerCase())} 
+                htmlFor="searchSpace" 
+                placeholder="Search Table" />
+
+            <button onClick={(i) => handleSearch(i)} >Search</button>
+            <button onClick={(i) => handleClear(i)} >clear</button>
+        </form>
         <div className="bodySeparation">
-            <ul className="employerName">{employerList}</ul>
-            <ul className="employerName">{postList}</ul>
+            <div className="tablebody1">
+                {calculatePagesEmployer().map(i => {
+                    return <span onClick={() => setCurrentEmployerPage(i)} className="pagination">{` ${i} `}</span>
+                })}
+                <ul className="tableBody">{employerList}</ul>
+            </div>
+            <div className="tablebody2">
+                {calculatePagesPost().map(i => {
+                    return <span onClick={() => {setCurrentPostPage(i)}} className="pagination">{` ${i} `}</span>
+                })}
+                <ul className="tableBody">{postList}</ul>               
+            </div>
         </div>
     </div>
     );

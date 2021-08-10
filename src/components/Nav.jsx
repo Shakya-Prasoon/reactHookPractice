@@ -9,14 +9,20 @@ function Nav() {
         <Link to="/">
             <li>Home</li>
         </Link>
+        <Link to="/spacex">
+            <li>Space X</li>
+        </Link>
         <Link to="/tablePage">
-            <li>Table Page</li>
+            <li>Tables</li>
         </Link>
-        <Link to="/newEntry">
+        {/* <Link to="/newEntry">
             <li>New Entry</li>
-        </Link>
+        </Link> */}
         <Link to="/counter">
             <li>Counter</li>
+        </Link>
+        <Link to="/movie">
+            <li>Movie</li>
         </Link>
     </ul>
     </nav>
