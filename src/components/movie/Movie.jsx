@@ -1,32 +1,31 @@
 import React, { useState, useEffect } from 'react'
-import { LinearProgress } from '@material-ui/core';
+// import { LinearProgress } from '@material-ui/core';
 import Hero from './hero/Hero';
 import axios from "axios";
 import Nomination from './nomination/Nomination';
 import MovieList from './list/MovieList';
 
 function Movie() {
-    const [isLoadingPosts, setIsLoadingPosts] = useState(false)
+    // const [isLoadingPosts, setIsLoadingPosts] = useState(false)
     const [movie, setMovie] = useState([])
     const [nominationList, setNominationList] = useState([])
     const [nominationCount, setNominationCount] = useState(0)
     const [searchString, setSearchString] = useState('')
 
     useEffect(() => {
-        setIsLoadingPosts(true)
+        // setIsLoadingPosts(true)
       axios.get(`http://www.omdbapi.com/?apikey=dadd11c2&s="${searchString}"`)
-        .then(res => {setMovie(res.data.Search)
-            console.log(res.data.Search);
-            setIsLoadingPosts(false)})
-        .catch(() => {setIsLoadingPosts(false)})
+        .then(res => {setMovie(res.data.Search)})
+        // .then (setIsLoadingPosts(false))
+        // .catch(() => {setIsLoadingPosts(false)})
     }, [searchString])
 
-    if(isLoadingPosts){ 
-        return(<>
-        <LinearProgress />
-        <LinearProgress color="secondary" />
-        </>)
-    }
+    // if(isLoadingPosts){ 
+    //     return(<>
+    //     <LinearProgress />
+    //     <LinearProgress color="secondary" />
+    //     </>)
+    // }
 
     return (
         <div className="movie">
