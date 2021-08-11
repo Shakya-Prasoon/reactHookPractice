@@ -6,8 +6,8 @@ import Counter from './components/Counter';
 import TablePage from './components/TablePage';
 import Nav from './components/Nav';
 // import NewEntry from './components/NewEntry';
-import SpaceX from './components/SpaceX';
-import Movie from './components/Movie';
+import SpaceX from './components/space/SpaceX';
+import Movie from './components/movie/Movie';
 import gif from './components/gif.gif'
 
 
