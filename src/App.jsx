@@ -33,7 +33,7 @@ const Home = () => (
 	<div className="home">
 		<h1 > Welcome to the HomePage! </h1>
 		<br />
-		<p>Let's do something crazy</p>
+		<h2>Imma watch Ya Suffer!</h2>
 		<br />
 		<img src={gif} alt="gif" style={{borderRadius: 15, width: 600}}/>
 	</div>
