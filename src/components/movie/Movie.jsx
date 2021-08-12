@@ -4,6 +4,7 @@ import Hero from './hero/Hero';
 import axios from "axios";
 import Nomination from './nomination/Nomination';
 import MovieList from './list/MovieList';
+import './movie.css'
 
 function Movie() {
     // const [isLoadingPosts, setIsLoadingPosts] = useState(false)

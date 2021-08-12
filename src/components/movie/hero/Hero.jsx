@@ -9,7 +9,8 @@ function Hero({searchString, setSearchString}) {
                 <input 
                     onChange={(e) => { setSearchString((e.target.value).toLowerCase())}} 
                     htmlFor="searchSpace" 
-                    placeholder="Movie Title" value= {searchString}/>
+                    placeholder="Movie Title"
+                    value= {searchString}/>
             </form>
         </>
     )

@@ -1,21 +1,17 @@
 import React from 'react'
+import MovieCard from '../MovieCard'
 
 function Nomination({nominationList, onNominationListChange, nominationCount, onNominationCountChange}) {
 
     function DisplayNominations(){
         let nomineeList = nominationList.map(movi =>{
-            return(
-                <div className="movieDisplay">
-                    <div className="imgBox">
-                        <img src={movi.Poster} alt = "pic"/>
-                    </div>
-                    <div className="movieInfo">
-                        <h2>{movi.Title}</h2>
-                        <p>{`Year: ${movi.Year}`}</p>
-                        <button
-                            onClick={(i) => unNominateClickHandle(i, movi)} >Remove</button>
-                    </div>
-                </div>)
+            return(<div className="movieDisplay">
+                <MovieCard movi={movi} />
+                <div className="cardButton">
+                    <button onClick={(i) => unNominateClickHandle(i, movi)} >Remove</button>
+                </div>
+                </div>
+            )
         })
         return nomineeList
     }

@@ -1,4 +1,5 @@
 import React from 'react'
+import MovieCard from '../MovieCard'
 
 function MovieList({movieObj, nominationList, onNominationListChange, nominationCount, onNominationCountChange}) {
 
@@ -26,12 +27,8 @@ function MovieList({movieObj, nominationList, onNominationListChange, nomination
             let newMvList = movieObj.map(movi => {
                 return(
                     <div className="movieDisplay">
-                        <div className="imgBox">
-                            <img src={movi.Poster} alt = "pic"/>
-                        </div>
-                        <div className="movieInfo">
-                            <h2>{movi.Title}</h2>
-                            <p>{`Year: ${movi.Year}`}</p>
+                        <MovieCard movi={movi} />
+                        <div className="cardButton">
                             <button
                                 disabled={checkDisable (movi.Title, movi.Year)}  
                                 onClick={(i) => nominateClickHandle(i, movi)} >Nominate</button>

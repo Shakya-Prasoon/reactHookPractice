@@ -1,0 +1,132 @@
+.movie {
+  background-color: rgb(204, 239, 255);
+}
+
+.SearchBar {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  
+  .SearchBar input {
+    width: 60vw;
+    height: 30px;
+    font-size: 30px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #1b1b1bfd;
+    color:white;
+  }
+  
+  .pageH1 {
+    text-align: center;
+    font-size: 70px;
+    font-family: 'Comic Sans MS';
+    color:#1b1b1bfd;
+  }
+  
+  .movieBody{
+    display: flex;
+    width: 100%;
+    margin-top: 50px;
+    min-height: 60vh;
+    height: 90%;
+  }
+  
+  .result{
+    text-align: center;
+    min-height: 60vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-right: 3px solid black;
+    align-items: center;
+    padding-top: 50px;
+  }
+  
+  
+  .nomination{
+    text-align: center;
+    min-height: 60vh;
+    height: 90%;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  h2 {
+    font-size: 40px;
+    font-family: 'Comic Sans MS';
+    color:#5a1313;
+  }
+  
+  .movieDisplay {
+    border-radius: 15px;
+    border: 2px solid gold;
+    background-color: rgb(149, 213, 243);
+    min-width: 20vw;
+    width: 35vw;
+    min-height: 150px;
+    margin: 10px;
+    display: grid;
+    grid-template-rows: 4fr 1fr;
+    grid-template-areas: "box-1 box-2" "box-1 box-3";
+    grid-column-gap: 2px;
+  }
+  .imgBox {
+    grid-area: box-1;
+    width: 14vw;
+  }
+  
+  .movieInfo {
+    width: 20vw;
+    grid-area: box-2;
+  }
+  
+  .cardButton {
+    grid-area: box-3;
+  }
+  
+  
+  .movieDisplay:hover{
+    filter: brightness(90%);
+  }
+  
+  .movieDisplay h2 {
+    font-size: 25px;
+    font-family: 'Comic Sans MS';
+    color:#461111;
+  }
+  .movieDisplay button {
+    font-size: 15px;
+    font-family: 'Comic Sans MS';
+    color:#e6e6e6;
+    background-color: #000000;
+    width: 100px;
+    margin-top: -2px;
+  }
+  .imgBox img {
+    margin: 1px;
+    height: 175px;
+    width: 14vw;
+    border-radius: 13px;
+    margin-bottom: -3px;
+  }
+  
+  .movieDisplay button:hover{
+    background-color:#343436 ;
+    color:gold;
+  }
+  
+  
+  .movieDisplay button:disabled{
+    background-color: #29292b;
+    color:rgb(224, 115, 115);
+  }
+  .movieDisplay p{
+    font-size: 14px;
+  }
+  
