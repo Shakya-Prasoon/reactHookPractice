@@ -1,7 +1,7 @@
 import React from 'react'
 import MovieCard from '../MovieCard'
 
-function MovieList({movieObj, nominationList, onNominationListChange, nominationCount, onNominationCountChange}) {
+function MovieList({movieObj, nominationList, onNominationListChange}) {
 
     function checkDisable(title, year){
         let checkArr = nominationList.filter(i => (
@@ -18,8 +18,6 @@ function MovieList({movieObj, nominationList, onNominationListChange, nomination
     function nominateClickHandle(i, newMovie){
         let prevNominees = [...nominationList]
         onNominationListChange([...prevNominees, newMovie])
-        nominationCount += 1 
-        onNominationCountChange(nominationCount)
     }
 
     function MovieContainer({movieObj}){
@@ -27,7 +25,13 @@ function MovieList({movieObj, nominationList, onNominationListChange, nomination
             let newMvList = movieObj.map(movi => {
                 return(
                     <div className="movieDisplay">
-                        <MovieCard movi={movi} />
+                        <MovieCard 
+                            title={movi.Title} 
+                            poster={movi.Poster} 
+                            year={movi.Year}
+                            imgClassName="imgBox"
+                            movieInfoClassName="movieInfo" />
+                            
                         <div className="cardButton">
                             <button
                                 disabled={checkDisable (movi.Title, movi.Year)}  

@@ -10,23 +10,15 @@ function Movie() {
     // const [isLoadingPosts, setIsLoadingPosts] = useState(false)
     const [movie, setMovie] = useState([])
     const [nominationList, setNominationList] = useState([])
-    const [nominationCount, setNominationCount] = useState(0)
+    // const [nominationCount, setNominationCount] = useState(0)
     const [searchString, setSearchString] = useState('')
 
+
     useEffect(() => {
-        // setIsLoadingPosts(true)
       axios.get(`http://www.omdbapi.com/?apikey=dadd11c2&s="${searchString}"`)
         .then(res => {setMovie(res.data.Search)})
-        // .then (setIsLoadingPosts(false))
-        // .catch(() => {setIsLoadingPosts(false)})
     }, [searchString])
 
-    // if(isLoadingPosts){ 
-    //     return(<>
-    //     <LinearProgress />
-    //     <LinearProgress color="secondary" />
-    //     </>)
-    // }
 
     return (
         <div className="movie">
@@ -39,14 +31,11 @@ function Movie() {
                     movieObj={movie} 
                     nominationList={nominationList} 
                     onNominationListChange={setNominationList}
-                    nominationCount={nominationCount}
-                    onNominationCountChange={setNominationCount}
                 />
                 <Nomination
                     nominationList={nominationList} 
                     onNominationListChange={setNominationList}
-                    nominationCount={nominationCount}
-                    onNominationCountChange={setNominationCount}/>    
+                />  
             </div>
         </div>
     )
