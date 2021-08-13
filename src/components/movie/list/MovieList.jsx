@@ -11,11 +11,12 @@ function MovieList({movieObj, nominationList, onNominationListChange}) {
             return true
         }
         else{
+            
             return false
         }
     }
 
-    function nominateClickHandle(i, newMovie){
+    function nominateClickHandle(newMovie){
         let prevNominees = [...nominationList]
         onNominationListChange([...prevNominees, newMovie])
     }
@@ -35,7 +36,7 @@ function MovieList({movieObj, nominationList, onNominationListChange}) {
                         <div className="cardButton">
                             <button
                                 disabled={checkDisable (movi.Title, movi.Year)}  
-                                onClick={(i) => nominateClickHandle(i, movi)} >Nominate</button>
+                                onClick={() => nominateClickHandle(movi)} >Nominate</button>
                         </div>
                     </div>)
             })

@@ -9,6 +9,7 @@ import Nav from './components/Nav';
 import SpaceX from './components/space/SpaceX';
 import Movie from './components/movie/Movie';
 import gif from './components/gif.gif'
+import NavBar from './components/nav/NavBar.js'
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 		<Router>
 			<div className="App">
 				<Nav />
+				<NavBar />
 				<Switch>
 					<Route path="/" exact component ={ Home } />
 					<Route path="/spacex" component ={ SpaceX } />
