@@ -22,6 +22,16 @@ function Movie() {
       });
   }, [searchString]);
 
+  useEffect(() => {
+    axios
+      .post(`http://localhost:4001/v1/nominations/getNominations`)
+      .then((res) => {
+        console.log(nominationList);
+        res.stringify(nominationList);
+      })
+      .catch((e) => console.log(`Error: ${e}`));
+  }, []);
+
   return (
     <div className="movie">
       <Hero searchString={searchString} setSearchString={setSearchString} />
